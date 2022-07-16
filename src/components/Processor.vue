@@ -24,7 +24,7 @@
         </div>
       </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 @mixin getStepNums($num) {
   @for $i from 1 through $num {
     &:nth-child(#{$i}) .stepper__panel__step--circle::after {

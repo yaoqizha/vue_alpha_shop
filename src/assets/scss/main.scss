@@ -12,3 +12,70 @@ $pale-grey: #f0f0f5;
   right: 0;
   margin-top: $margin-top;
 }
+
+:root {
+  --main-bg: white;
+  --main-fc: #2A2A2A;
+  --input-border: #4a4a4a;
+  --input-fc: #999;
+  --cart-button: #f0f0f5;
+  --step-undone: #AFB1BD;
+  --step-done: #2A2A2A;
+  --btn-next: #F67599;
+  --form-label: #808080;
+  --pale-grey: #F0F0F5;
+  --shoppingcart-bg: white;
+  --control-btn: #fff;
+  --control-fc: black;
+  --footer-bg: #E5E5E5;
+}
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: ($spacer * 0.25),
+  2: ($spacer * 0.5),
+  3: ($spacer * 0.75),
+  4: $spacer,
+  5: ($spacer * 1.25),
+  6: ($spacer * 1.5),
+  7: ($spacer * 1.75),
+  8: ($spacer * 2)
+);
+
+@each $prop,
+$abbrev in (margin: m, padding: p) {
+
+  @each $num,
+  $val in $spacers {
+    .#{$abbrev}-#{$num} {
+      #{$prop}: $val;
+    }
+
+    .#{$abbrev}t-#{$num} {
+      #{$prop}-top: $val;
+    }
+
+    .#{$abbrev}r-#{$num} {
+      #{$prop}-right: $val;
+    }
+
+    .#{$abbrev}b-#{$num} {
+      #{$prop}-bottom: $val;
+    }
+
+    .#{$abbrev}l-#{$num} {
+      #{$prop}-left: $val;
+    }
+
+    .#{$abbrev}x-#{$num} {
+      #{$prop}-right: $val;
+      #{$prop}-left: $val;
+    }
+
+    .#{$abbrev}y-#{$num} {
+      #{$prop}-top: $val;
+      #{$prop}-bottom: $val;
+    }
+  }
+}
