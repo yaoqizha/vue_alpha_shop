@@ -8,14 +8,19 @@
         <!-- stepper -->
         <Processor :step="step" />
         <!-- form -->
-        <Form :step="step" />
+        <Form
+          :step="step"
+          :shippingFee="shippingFee"
+          @dhl-ship="setDHLShip"
+          @normal-ship="setNormalShip"
+        />
         <!-- line -->
         <div class="line"></div>
         <!-- button -->
         <StepButton :step="step" @add-step="addStep" @minus-step="minusStep" />
       </div>
       <!-- shopping cart -->
-      <ShoppingCart />
+      <ShoppingCart :shippingFee="shippingFee" />
     </div>
   </main>
 </template>
@@ -34,6 +39,7 @@ export default {
   data() {
     return {
       step: 1,
+      shippingFee: 0,
     };
   },
   methods: {
@@ -46,6 +52,14 @@ export default {
       if (this.step > 1) {
         this.step -= 1;
       }
+    },
+    setDHLShip() {
+      this.shippingFee = 500;
+      console.log("d");
+    },
+    setNormalShip() {
+      this.shippingFee = 0;
+      console.log("n");
     },
   },
 };

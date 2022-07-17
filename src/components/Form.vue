@@ -52,9 +52,15 @@
         <div id="step2" class="part" v-bind:class="{ 'd-none': step !== 2 }">
           <div class="part-title my-6">運送方式</div>
           <div class="form__row">
-            <div class="form__btn--shipway ship-active">
+            <div class="form__btn--shipway">
               <div class="radio-wrapper">
-                <input name="shipway" type="radio" value="standard" />
+                <input
+                  name="shipway"
+                  type="radio"
+                  value="standard"
+                  @click="$emit('normal-ship')"
+                  checked
+                />
               </div>
               <div class="form__btn--shipway-description">
                 <div class="ship-method">標準運送</div>
@@ -66,13 +72,18 @@
           <div class="form__row">
             <div class="form__btn--shipway">
               <div class="radio-wrapper">
-                <input name="shipway" type="radio" value="DHL" />
+                <input
+                  name="shipway"
+                  type="radio"
+                  value="DHL"
+                  @click="$emit('dhl-ship')"
+                />
               </div>
               <div class="form__btn--shipway-description">
                 <div class="ship-method fw-700">DHL貨運</div>
                 <div class="ship-time">48小時內送達</div>
               </div>
-              <div class="form__btn--shipway-fee">$500</div>
+              <div class="form__btn--shipway-fee">$ 500</div>
             </div>
           </div>
         </div>

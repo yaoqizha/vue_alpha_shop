@@ -26,7 +26,7 @@
         </div>
         <div class="shipping-fee-wrapper">
           <div class="shipping-fee-title">運費</div>
-          <div class="shipping-fee-amount">免費</div>
+          <div class="shipping-fee-amount">{{ shippingFee? `$${shippingFee}`: "免費" }}</div>
         </div>
         <div class="total-fee-wrapper">
           <div class="total-fee-title">小計</div>
@@ -60,12 +60,15 @@ export default {
       ],
     };
   },
+  props: {
+    shippingFee: Number,
+  },
   computed: {
     finalPrice() {
-      const price = this.products.reduce(
-        (acc, item) => acc + item.price * item.amount,
-        0
-      );
+      const price =
+        this.products.reduce((acc, item) => acc + item.price * item.amount, 0) +
+        this.shippingFee;
+
       return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
