@@ -3,40 +3,25 @@
     <div id="shopping-cart-container">
       <h4 class="shopping-cart__panel--title">購物籃</h4>
       <div class="shopping-cart__panel--items">
-        <div class="shopping-cart__panel--item">
+        <div
+          v-for="product in products"
+          :key="product.id"
+          class="shopping-cart__panel--item"
+        >
           <div class="img-wrapper">
-            <img
-              src="../../public/product1@1x.png"
-              alt=""
-              class="shopping-cart-image"
-            />
+            <img :src="product.image" class="shopping-cart-image" />
           </div>
           <div class="shopping-cart__panel--item-right">
-            <div class="cart-item-title">破壞補釘修身牛仔褲</div>
+            <div class="cart-item-title">{{ product.name }}</div>
             <div id="product1" class="cart-item-buttons-wrapper">
-              <div class="cart-item-button1"></div>
-              <div class="cart-item-number">1</div>
-              <div class="cart-item-button2"></div>
+              <div class="cart-item-button1" @click="addAmount(product)"></div>
+              <div class="cart-item-number">{{ product.amount }}</div>
+              <div
+                class="cart-item-button2"
+                @click="minusAmount(product)"
+              ></div>
             </div>
-            <div class="cart-item-price">$3,999</div>
-          </div>
-        </div>
-        <div class="shopping-cart__panel--item">
-          <div class="img-wrapper">
-            <img
-              src="../../public/product2@1x.png"
-              alt=""
-              class="shopping-cart-image"
-            />
-          </div>
-          <div class="shopping-cart__panel--item-right">
-            <div class="cart-item-title">刷色直筒牛仔褲</div>
-            <div id="product2" class="cart-item-buttons-wrapper">
-              <div class="cart-item-button1"></div>
-              <div class="cart-item-number">1</div>
-              <div class="cart-item-button2"></div>
-            </div>
-            <div class="cart-item-price">$1,299</div>
+            <div class="cart-item-price">{{ product.totalPrice }}</div>
           </div>
         </div>
         <div class="shipping-fee-wrapper">
@@ -45,12 +30,72 @@
         </div>
         <div class="total-fee-wrapper">
           <div class="total-fee-title">小計</div>
-          <div class="total-fee-amount">$5,298</div>
+          <div class="total-fee-amount">{{ finalPrice }}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      products: [
+        {
+          id: 1,
+          name: "破壞補釘修身牛仔褲",
+          image: require("../../public/product1@1x.png"),
+          amount: 1,
+          price: 3999,
+          totalPrice: "$3,999",
+        },
+        {
+          id: 2,
+          name: "刷色直筒牛仔褲",
+          image: require("../../public/product2@1x.png"),
+          amount: 1,
+          price: 1299,
+          totalPrice: "$1,299",
+        },
+      ],
+    };
+  },
+  computed: {
+    finalPrice() {
+      const price = this.products.reduce(
+        (acc, item) => acc + item.price * item.amount,
+        0
+      );
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      }).format(price);
+    },
+  },
+  methods: {
+    addAmount(product) {
+      product.amount += 1;
+      product.totalPrice = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      }).format(product.amount * product.price);
+    },
+    minusAmount(product) {
+      if (product.amount > 0) {
+        product.amount -= 1;
+        product.totalPrice = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(product.amount * product.price);
+      }
+    },
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 %cart-button-style {
   width: 26px;

@@ -6,13 +6,13 @@
     <div class="main__content-wrapper container">
       <div class="container--left">
         <!-- stepper -->
-        <Processor />
+        <Processor :step="step" />
         <!-- form -->
-        <Form />
+        <Form :step="step" />
         <!-- line -->
         <div class="line"></div>
         <!-- button -->
-        <StepButton />
+        <StepButton :step="step" @add-step="addStep" @minus-step="minusStep" />
       </div>
       <!-- shopping cart -->
       <ShoppingCart />
@@ -30,6 +30,23 @@ export default {
     Form,
     StepButton,
     ShoppingCart,
+  },
+  data() {
+    return {
+      step: 1,
+    };
+  },
+  methods: {
+    addStep() {
+      if (this.step < 3) {
+        this.step += 1;
+      }
+    },
+    minusStep() {
+      if (this.step > 1) {
+        this.step -= 1;
+      }
+    },
   },
 };
 </script>

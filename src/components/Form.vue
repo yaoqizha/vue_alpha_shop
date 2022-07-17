@@ -2,7 +2,7 @@
   <div class="form__panel">
     <div class="form-container">
       <form action="" id="form" class="form">
-        <div id="step1" class="part">
+        <div id="step1" class="part" v-bind:class="{ 'd-none': step !== 1 }">
           <div class="part-title my-6">寄送地址</div>
           <div class="form__row form__row--double">
             <label for="">稱謂</label>
@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-        <div id="step2" class="part d-none">
+        <div id="step2" class="part" v-bind:class="{ 'd-none': step !== 2 }">
           <div class="part-title my-6">運送方式</div>
           <div class="form__row">
             <div class="form__btn--shipway ship-active">
@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        <div id="step3" class="part d-none">
+        <div id="step3" class="part" v-bind:class="{ 'd-none': step !== 3 }">
           <div class="part-title my-6">付款資訊</div>
           <div class="form__row">
             <label for="">持卡人姓名</label
@@ -101,6 +101,14 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    step: Number,
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 %input-style {
   height: 40px;

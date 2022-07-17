@@ -1,16 +1,46 @@
 <template>
   <div id="btn-control" class="control__panel">
-    <button class="control__panel--back v-hidden">
+    <button
+      class="control__panel--back"
+      v-bind:class="{ 'v-hidden': step === 1 }"
+      @click="$emit('minus-step')"
+    >
       上一步<span class="arrow back-arrow">←</span>
     </button>
-    <button class="control__panel--next">
-      下一步 <span class="arrow next-arrow">→</span>
+    <button class="control__panel--next" @click="$emit('add-step')">
+      {{ step === 3 ? "確認下單" : "下一步" }}
+      <span
+        class="next-arrow"
+        v-bind:class="{ 'd-none': step === 3, arrow: step !== 3 }"
+        >→</span
+      >
     </button>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {};
+  },
+  props: {
+    step: Number,
+  },
+  methods: {
+    addStep() {
+      this.$emit("add-step");
+    },
+    minusStep() {
+      this.$emit("minus-step");
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 .v-hidden {
   visibility: hidden;
+}
+.d-none {
+  display: none;
 }
 %control-button-style {
   width: 100%;
