@@ -39,9 +39,6 @@ export default {
 .v-hidden {
   visibility: hidden;
 }
-.d-none {
-  display: none;
-}
 %control-button-style {
   width: 100%;
   height: 46px;

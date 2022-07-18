@@ -55,11 +55,9 @@ export default {
     },
     setDHLShip() {
       this.shippingFee = 500;
-      console.log("d");
     },
     setNormalShip() {
       this.shippingFee = 0;
-      console.log("n");
     },
   },
 };
