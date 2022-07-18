@@ -1,4 +1,4 @@
-![My Image](../public/localhost_8080_check.jpg) 
+![My Image](localhost_8080_check.png) 
 
 # vue_alphacamp_shop
 
